@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulador de ROI — edunext</title>
-  <link rel="shortcut icon" href="assets/logo verde água.svg" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -28,6 +27,9 @@
       color: var(--text);
       min-height: 100vh;
       padding: 2rem 1rem 3rem;
+    }
+    @media (max-width: 640px) {
+      body { padding: 1rem 0.75rem 2rem; }
     }
 
     .container { max-width: 960px; margin: 0 auto; }
@@ -101,6 +103,8 @@
       background: var(--edu-dark);
       border-radius: var(--radius);
       padding: 1.5rem;
+      min-width: 0;
+      overflow: hidden;
     }
     .results-title {
       font-size: 11px; font-weight: 600;
@@ -115,11 +119,13 @@
       background: rgba(255,255,255,0.07);
       border-radius: 10px;
       padding: 0.875rem 1rem;
+      min-width: 0;
+      overflow: hidden;
     }
     .kpi-label { font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }
-    .kpi-value { font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
+    .kpi-value { font-size: clamp(14px, 4vw, 20px); font-weight: 700; color: #fff; line-height: 1.1; word-break: break-word; }
     .kpi-value.teal { color: var(--edu-teal); }
-    .kpi-value.large { font-size: 26px; }
+    .kpi-value.large { font-size: clamp(18px, 5.5vw, 26px); }
     .kpi-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
 
     /* ROI banner */
@@ -129,20 +135,21 @@
       border-radius: 10px;
       padding: 1rem 1.25rem;
       display: flex; align-items: center; justify-content: space-between;
+      gap: 0.5rem;
       margin-bottom: 1.25rem;
     }
-    .roi-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .roi-label { font-size: 12px; color: rgba(255,255,255,0.5); min-width: 0; flex: 1; }
     .roi-label strong { display: block; font-size: 13px; color: rgba(255,255,255,0.85); margin-bottom: 2px; font-weight: 600; }
-    .roi-value { font-size: 34px; font-weight: 700; color: var(--edu-teal); }
+    .roi-value { font-size: clamp(22px, 7vw, 34px); font-weight: 700; color: var(--edu-teal); white-space: nowrap; flex-shrink: 0; }
 
     /* Bar chart */
     .chart-area { margin-bottom: 1.125rem; }
     .chart-label { font-size: 11px; color: rgba(255,255,255,0.35); margin-bottom: 8px; letter-spacing: 0.04em; }
-    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
-    .bar-name { font-size: 12px; color: rgba(255,255,255,0.6); min-width: 80px; }
-    .bar-track { flex: 1; height: 7px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+    .bar-name { font-size: 12px; color: rgba(255,255,255,0.6); min-width: 68px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 7px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; min-width: 0; }
     .bar-fill  { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
-    .bar-amt   { font-size: 12px; color: rgba(255,255,255,0.75); min-width: 82px; text-align: right; font-weight: 600; }
+    .bar-amt   { font-size: 11px; color: rgba(255,255,255,0.75); white-space: nowrap; text-align: right; font-weight: 600; flex-shrink: 0; }
 
     /* Donut */
     .donut-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
